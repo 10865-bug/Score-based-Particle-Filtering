@@ -1,0 +1,49 @@
+{
+    "$schema": "https://raw.githubusercontent.com/mfussenegger/dapconfig-schema/master/dapconfig-schema.json",
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "python",
+            "request": "launch",
+            "name": "Launch main",
+            "program": "/home/sci/ttransue/GitHub/Data-Assimilation-Flow-Matching/src/dafm/main.py",
+            "args": [
+                "dataset=NavierStokesDim256",
+                "model=EnsembleKalmanFilterPerturbedObservationsNavierStokes"
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "${input:gpu}"
+            }
+        },
+        {
+            "type": "python",
+            "request": "launch",
+            "name": "Launch baselines",
+            "program": "/home/sci/ttransue/GitHub/Data-Assimilation-Flow-Matching/src/dafm/baselines.py",
+            "args": [
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "${input:gpu}"
+            }
+        },
+        {
+            "type": "python",
+            "request": "launch",
+            "name": "Pytest",
+            "program": "/home/sci/ttransue/GitHub/Data-Assimilation-Flow-Matching/.venv/bin/pytest",
+            "args": [
+                "../../tests/test_datasets.py"
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "${input:gpu}"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "gpu",
+            "type": "promptString",
+            "description": "Pick a GPU"
+        }
+    ]
+}
