@@ -1,0 +1,1 @@
+# make conf a Python package
