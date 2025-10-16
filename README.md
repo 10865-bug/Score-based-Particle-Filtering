@@ -38,33 +38,6 @@ This is a repository that draws inspiration from Data Assistance Flow Matching s
 
 ---
 
-## Running the data assimilation algorithms
-
-All experiments are launched via:
-
-   python src/dafm/main.py dataset=<dataset> model=<model> <other_overrides>...
-
-### Datasets
-- _NavierStokes: 2D Navier–Stokes PDE with periodic boundary conditions.
-- _KuramotoSivashinsky: 1D chaotic Kuramoto–Sivashinsky PDE.
-
-### Models
-- _FlowMatchingMarginal: Flow Matching–based Ensemble Flow Filter (EnFF).
-- Other classical baselines (e.g., Bootstrap Particle Filter, EnKF) are also available in the codebase.
-
-### Key Overrides
-- model/diffusion_path=PreviousPosteriorToPredictive
-- model/inflation_scale=NoScaling
-- model/guidance=_Local
-- model/guidance/schedule=Constant
-- model.guidance.schedule.constant=<value>
-- model.diffusion_path.sigma_min=1e-3
-- model.sampling_time_step_count=<steps>
-- dataset.observation_noise_std=<value>
-- dataset.state_dimension=<value>
-
----
-
 ## Examples
 
 Here are two working examples:
@@ -79,7 +52,7 @@ Here are two working examples:
      model.sampling_time_step_count=10 \
      dataset.observation_noise_std=0.01
 
-   # Run EnFF-F2P for Kuramoto–Sivashinsky (1024-dim state)
+   # Run EnFF-F2P for Kuramoto–Sivashinsky
    python src/dafm/main.py dataset=_KuramotoSivashinsky model=_FlowMatchingMarginal \
      model/diffusion_path=PreviousPosteriorToPredictive \
      model/inflation_scale=NoScaling \
@@ -105,17 +78,6 @@ We provide Jupyter notebooks in the `notebooks/` directory to process experiment
 
 ---
 
-## Running experiments in parallel
-
-You can use GNU parallel to run multiple experiments:
-
-   parallel --eta --header : python src/dafm/main.py <override_1>={<param_1>} <override_2>={<param_2>} ... \
-     ::: <param_1> <p1value_1> <p1value_2> ... \
-     ::: <param_2> <p2value_1> <p2value_2> ...
-
-Note: On network file systems (NFS), SQLite database writes may be corrupted if multiple processes write simultaneously. Use `-j 1` with `-c job` for preflight configuration saving.
-
----
 
 ## References
 
