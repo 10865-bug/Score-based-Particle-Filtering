@@ -12,14 +12,17 @@ This is a repository that draws inspiration from Data Assistance Flow Matching s
 
 2. Install Python dependencies using `uv`:
 
+   ```bash
    uv sync
 
 3. Activate the Python virtual environment:
 
+   ```bash
    source .venv/bin/activate
 
 4. Test your installation:
 
+   ```bash
    pytest tests
 
 5. Edit the `out_dir` and `run_subdir` fields of the `Conf` class in `src/conf/conf.py` to the directory where you want the output of every experiment to be saved.
