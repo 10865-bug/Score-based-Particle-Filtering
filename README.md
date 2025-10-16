@@ -7,6 +7,7 @@ This is a repository that draws inspiration from Data Assistance Flow Matching s
 
 1. Install `uv`:
 
+   ```bash
    curl -LsSf https://astral.sh/uv/install.sh | sh
 
 2. Install Python dependencies using `uv`:
